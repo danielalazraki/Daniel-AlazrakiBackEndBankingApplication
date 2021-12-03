@@ -10,6 +10,7 @@ import {
   push,
   get,
 } from "firebase/database";
+import { getBalance } from "../client/src/api/firebase-client-helper";
 
 //init firebase
 const firebaseConfig = {
@@ -30,7 +31,7 @@ export const db = getDatabase(app);
 
 function handle(uid, data) {
   console.log("type: ", typeof data + "length ", data.length);
-  let totalBalance = 0;
+  let totalBalance = getBalance(uid);
   for (const transaction of Object.values(data)) {
     console.log("tran: ", transaction.type);
     if (transaction.type === "DEPOSIT") {
