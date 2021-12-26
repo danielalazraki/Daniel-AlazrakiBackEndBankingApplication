@@ -62,7 +62,7 @@ export async function createTransaction(uid, type, amount) {
     return {
       tid,
       type,
-      amount,
+      amount
     };
   } catch (err) {
     console.error(err);
@@ -78,7 +78,7 @@ export async function createTransaction(uid, type, amount) {
 
 export async function updateBalance(uid, type, amount) {
   return createTransaction(uid, type, amount).then(async () => {
-    let data = null;
+    let data;
     try {
       const snapshot = await get(ref(db, `users/${uid}/transactions`));
       if (snapshot.exists()) {
